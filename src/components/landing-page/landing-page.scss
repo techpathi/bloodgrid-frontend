@@ -1,0 +1,62 @@
+$primary-color: #b53838;
+$canvas-color: #f2e2e4;
+
+.landing-container {
+  height: 100vh;
+  margin: 0;
+  background-color: $canvas-color;
+  .top-container,
+  .bottom-container {
+    background-color: $primary-color;
+  }
+  .top-container {
+    height: auto;
+    border-radius: 0 0 5% 5%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1em;
+    .hero-text {
+      font-size: 1.5em;
+      padding: 1.5em 1.5em 0 1.5em;
+      line-height: 1.5em;
+      font-family: Roboto;
+    }
+    .logo-block {
+      font-size: 3em;
+      font-weight: bold;
+      font-family: 'Bebas Neue', cursive;
+      word-spacing: 1em;
+    }
+    .hero-text,
+    .logo-block {
+      font-size: 1.5em;
+      color: white;
+    }
+  }
+  .middle-container {
+    & > div {
+      width: 100vw;
+    }
+    height: 30%;
+    display: flex;
+    align-items: center;
+    .action-button {
+      width: 70vw !important;
+      max-width: 300px;
+      min-width: 200px;
+      margin-bottom: 1em;
+      color: $primary-color;
+    }
+  }
+  .bottom-container {
+    height: auto;
+    border-radius: 5% 5% 0 0;
+    .hero-text {
+      font-size: 1.5em;
+      padding: 1.5em 1.5em 0 1.5em;
+      line-height: 1.5em;
+      font-family: Roboto;
+      color: white;
+    }
+  }
+}

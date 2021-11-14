@@ -1,0 +1,100 @@
+$primary-color: #b53838;
+$canvas-color: #f2e2e4;
+
+.register-donor-container {
+  width: 100%;
+  max-width: none !important;
+  height: 100vh;
+  overflow-y: scroll;
+  margin: 0;
+  // background-color: $canvas-color;
+  padding: 1em;
+  .header-text {
+    padding: 1em 1em 0 1em;
+    font-family: 'Vollkorn', serif;
+    color: $primary-color;
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+  }
+  .register-donor-form {
+    padding: 1em;
+    width: 90vw;
+    max-width: 600px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & > * {
+      width: 100%;
+      max-width: 600px;
+      min-width: 200px;
+      padding: 0.5em !important;
+      border-radius: 5px;
+      background-color: white;
+      font-family: 'Vollkorn', serif;
+      margin-bottom: 1em;
+    }
+    .location-block {
+      display: inline-flex;
+      padding: 0 1em;
+      width: inherit;
+      #place-search-input {
+        width: 90%;
+        margin: auto;
+        background-color: white;
+      }
+      .location-picker {
+        margin-left: 0.5em;
+        width: 10%;
+        height: auto;
+        color: gray;
+      }
+    }
+  }
+  .action-button {
+    width: 50% !important;
+    max-width: 600px;
+    min-width: 200px;
+  }
+}
+
+@-webkit-keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -webkit-transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-30px);
+  }
+  60% {
+    -webkit-transform: translateY(-15px);
+  }
+}
+
+.bounce {
+  -webkit-animation: bounce 1s infinite alternate;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
