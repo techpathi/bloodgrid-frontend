@@ -35,14 +35,14 @@ const RegisterDonor: React.FC = (): JSX.Element => {
   const [gender, setGender] = useState<string | null>(null);
   const [bloodGroup, setBloodGroup] = useState<string | null>(null);
   const [locationCoords, setLocationCoords] = useState<object | null>(null);
-  const [selectedPlace, setSelectedPlace] = useState<object | null>(null);
+  const [place, setPlace] = useState<object | null>(null);
   const [isPlaceOrLocationValid, setIsPlaceOrLocationValid] =
     useState<boolean>(false);
   const [formData, setFormData] = useState<object | null>(null);
 
   useEffect(() => {
     isPlaceOrLocationSelected();
-  }, [selectedPlace, locationCoords]);
+  }, [place, locationCoords]);
 
   const locationSuccessColor: React.CSSProperties = {
     color: locationCoords !== null ? '#669566' : ''
@@ -106,7 +106,7 @@ const RegisterDonor: React.FC = (): JSX.Element => {
   };
 
   const updatePlaceSelection = (place: object): void => {
-    setSelectedPlace(place);
+    setPlace(place);
   };
 
   const getErrorMessage = (
@@ -146,7 +146,30 @@ const RegisterDonor: React.FC = (): JSX.Element => {
   };
 
   const isPlaceOrLocationSelected = (): void => {
-    if (locationCoords || selectedPlace) setIsPlaceOrLocationValid(true);
+    if (locationCoords || place) setIsPlaceOrLocationValid(true);
+  };
+
+  useEffect(() => {
+    if (formData !== null) {
+      registerDonor();
+    }
+  }, [formData]);
+
+  const registerDonor = async (): Promise<void> => {
+    const response = await fetch('http://localhost:4000/donors', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(formData)
+    });
+    if (response.ok) {
+      let jsonResponse = await response.json();
+      alert(jsonResponse.message);
+    } else {
+      alert('Oops! Cannot register donors at this moment!!');
+    }
   };
 
   const onSubmit = () => {
@@ -156,7 +179,7 @@ const RegisterDonor: React.FC = (): JSX.Element => {
       gender,
       bloodGroup,
       locationCoords,
-      selectedPlace
+      place
     });
   };
 
