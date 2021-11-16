@@ -38,7 +38,6 @@ const RegisterDonor: React.FC = (): JSX.Element => {
   const [place, setPlace] = useState<object | null>(null);
   const [isPlaceOrLocationValid, setIsPlaceOrLocationValid] =
     useState<boolean>(false);
-  const [formData, setFormData] = useState<object | null>(null);
 
   useEffect(() => {
     isPlaceOrLocationSelected();
@@ -92,9 +91,9 @@ const RegisterDonor: React.FC = (): JSX.Element => {
           }, 2000);
         },
         err => {
-          if (err.code == 1) {
+          if (err.code === 1) {
             alert('Error: Access is denied!');
-          } else if (err.code == 2) {
+          } else if (err.code === 2) {
             alert('Error: Position is unavailable!');
           }
           setTimeout(() => {
@@ -149,13 +148,7 @@ const RegisterDonor: React.FC = (): JSX.Element => {
     if (locationCoords || place) setIsPlaceOrLocationValid(true);
   };
 
-  useEffect(() => {
-    if (formData !== null) {
-      registerDonor();
-    }
-  }, [formData]);
-
-  const registerDonor = async (): Promise<void> => {
+  const registerDonor = async (formData: object): Promise<void> => {
     const response = await fetch('http://localhost:4000/donors', {
       headers: {
         Accept: 'application/json',
@@ -166,21 +159,25 @@ const RegisterDonor: React.FC = (): JSX.Element => {
     });
     if (response.ok) {
       let jsonResponse = await response.json();
+      resetDonorForm();
       alert(jsonResponse.message);
     } else {
       alert('Oops! Cannot register donors at this moment!!');
     }
   };
 
+  const resetDonorForm = (): void => {
+    setFullName(null);
+    setAge('');
+    setGender(null);
+    setBloodGroup(null);
+    setLocationCoords(null);
+    setPlace(null);
+    setIsPlaceOrLocationValid(false);
+  };
+
   const onSubmit = () => {
-    setFormData({
-      fullName,
-      age,
-      gender,
-      bloodGroup,
-      locationCoords,
-      place
-    });
+    registerDonor({ fullName, age, gender, bloodGroup, locationCoords, place });
   };
 
   return (
