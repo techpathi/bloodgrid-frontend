@@ -3,6 +3,7 @@ import './landing-page.scss';
 import { Button } from '@chakra-ui/button';
 import { BiDonateBlood, BiSearch } from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
+import { firebaseApp } from '../../firebase/Config';
 
 const LandingPage: React.FC = (): JSX.Element => {
   const history = useHistory();
@@ -12,6 +13,8 @@ const LandingPage: React.FC = (): JSX.Element => {
         <div>
           <div className='logo-block'>BLOODGRID</div>
           <p className='hero-text'>
+            Welcome {firebaseApp.auth().currentUser?.displayName}
+            <br />
             Find blood donors around you just like you find a cab!
           </p>
         </div>
